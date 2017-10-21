@@ -1,7 +1,68 @@
 // Create an app object with methods
+var App = function() {
+  this.server;
+  this.count;
+};
 
-   
+
+// Method to hold most of our jquery, will run as soon as app starts
+App.prototype.init = function() {
+  $(document).ready(function() {
+    
+    $('#main').append('<h4>Our app loaded!!</h4>');
+    
+  });
+};
+
+//requires user interaction and input. send message to server [post]
+App.prototype.send = function() {
   
+};
+
+//get new message at a set time interval & and when someone posts. 
+//get message from server, when doc loads 
+App.prototype.fetch = function() {
+  
+};
+
+//display messages + something else 
+App.prototype.renderMessage = function() {
+  //need to read the message. QA check to see if its bad 
+  
+};
+
+//hide message from user 
+App.prototype.clearMessage = function() {
+  
+};
+
+//create rooms for user 
+App.prototype.renderRoom = function() {
+  
+};
+// Lets users click on a username to add as a friend, will need way to keep track
+// Bold all messages sent by friend, 
+App.prototype.handleUsernameClick = function() {
+  
+};
+
+// Take in form submission for message
+// Escape input to avoid XSS
+App.prototype.handleSubmit = function() {
+  
+};
+// Takes user input and escapes text
+App.prototype.escapeText = function(input) {
+  
+};
+
+
+var app = new App();
+
+app.init();
+
+
+
   
   
 var getMessages = function(callback) {
