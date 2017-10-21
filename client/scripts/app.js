@@ -1,36 +1,75 @@
 // Create an app object with methods
 var App = function() {
-  this.server;
-  this.count;
+  this.server = 'url';
+  this.count = 0;
+  this.messages = [];
 };
 
 
 // Method to hold most of our jquery, will run as soon as app starts
 App.prototype.init = function() {
+  
+  console.log(this, ' at top of init');
+  this.fetch.call(this, this.storeMessages.bind(this));
+  
   $(document).ready(function() {
     
     $('#main').append('<h4>Our app loaded!!</h4>');
     
+    // this.renderMessage();
+    
+  }.bind(this));
+  
+  
+};
+
+App.prototype.storeMessages = function(data) {
+  this.messages = data.responseJSON.results;
+  console.log(this, ' within storeMessages');
+  this.renderMessage();
+};
+
+
+
+//get new message at a set time interval & and when someone posts. 
+//get message from server, when doc loads 
+App.prototype.fetch = function(callback) {
+  console.log(this, ' within fetch');
+  $.ajax({
+    url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+    type: 'GET',
+    dataType: 'json',
+    complete: function(data) { callback(data); }
   });
+  
+};
+
+
+
+//display messages + something else 
+App.prototype.renderMessage = function() {
+  //need to read the message. QA check to see if its bad 
+   //QA later on
+   
+  //  console.log(this.messages.length);
+  // setTimeout(function() {
+  //   console.log(this.messages);}
+  // , 5000); 
+  // // setTimeout(function() {
+  // //   for (var i = 0; i < this.messages.length; i++) {
+  // //     console.log(this.messages[i]);
+  // //   }
+  // // }, 3000); 
+  console.log(this, ' within renderMessage');
+  
+  console.log(this.messages);
+
 };
 
 //requires user interaction and input. send message to server [post]
 App.prototype.send = function() {
   
 };
-
-//get new message at a set time interval & and when someone posts. 
-//get message from server, when doc loads 
-App.prototype.fetch = function() {
-  
-};
-
-//display messages + something else 
-App.prototype.renderMessage = function() {
-  //need to read the message. QA check to see if its bad 
-  
-};
-
 //hide message from user 
 App.prototype.clearMessage = function() {
   
@@ -65,27 +104,27 @@ app.init();
 
   
   
-var getMessages = function(callback) {
-  $.ajax({
-    url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
-    type: 'GET',
-    dataType: 'json',
-    complete: function(data) { callback(data); }
-  });
-};
+// var getMessages = function(callback) {
+//   $.ajax({
+//     url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+//     type: 'GET',
+//     dataType: 'json',
+//     complete: function(data) { callback(data); }
+//   });
+// };
 
-let jsonResults = null;
+// let jsonResults = null;
 
-var storeMessages = function(data) {
+// var storeMessages = function(data) {
   
 
-  jsonResults = data.responseJSON.results; 
+//   jsonResults = data.responseJSON.results; 
 
-};
+// };
 
-getMessages(storeMessages);
+// getMessages(storeMessages);
 
-setTimeout(function() { console.log(jsonResults); }, 2000);
+// setTimeout(function() { console.log(jsonResults); }, 2000);
   
   
   
