@@ -3,6 +3,7 @@ var App = function() {
   this.server = 'url';
   this.count = 0;
   this.messages = [];
+  this.username = null;
 };
 
 
@@ -16,7 +17,11 @@ App.prototype.init = function() {
     
     $('#main').append('<h4>Our app loaded!!</h4>');
     
-    // this.renderMessage();
+    if (this.username === null && window.location.search !== undefined) {
+      var newSearchStr = window.location.search;
+      this.username = newSearchStr.replace(/%20/g, ' ').slice(10);
+    }
+     
     
   }.bind(this));
   
@@ -51,23 +56,31 @@ App.prototype.renderMessage = function() {
   //need to read the message. QA check to see if its bad 
    //QA later on
    
-  //  console.log(this.messages.length);
-  // setTimeout(function() {
-  //   console.log(this.messages);}
-  // , 5000); 
-  // // setTimeout(function() {
-  // //   for (var i = 0; i < this.messages.length; i++) {
-  // //     console.log(this.messages[i]);
-  // //   }
-  // // }, 3000); 
+   //Loop through each message
+   // Get username and message text
+   // Prepend to chats div 
+   
+   
   console.log(this, ' within renderMessage');
-  
   console.log(this.messages);
+
+  for (var i = 0; i < this.messages.length; i++) {
+    var username = this.messages[i].username;
+    var text = this.messages[i].text;
+    // var date = this.messages[i].createdAt;
+    $('#chats').prepend(
+      `<div>
+        <h4>${username}</h4>
+        <p>${text}</p>
+      </div>`);
+  }
 
 };
 
 //requires user interaction and input. send message to server [post]
 App.prototype.send = function() {
+  // Send a POST request to the server
+  
   
 };
 //hide message from user 
@@ -88,6 +101,12 @@ App.prototype.handleUsernameClick = function() {
 // Take in form submission for message
 // Escape input to avoid XSS
 App.prototype.handleSubmit = function() {
+  // Wait for user to click button
+  // Escape user input
+  // Create message object from user input
+  // Call send on message
+  
+  
   
 };
 // Takes user input and escapes text

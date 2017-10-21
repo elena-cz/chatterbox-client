@@ -15,7 +15,9 @@
         if (newSearch !== '' & newSearch !== '?') {
           newSearch += '&';
         }
-        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+        this.username = (prompt('What is your name?') || 'anonymous');
+        newSearch += 'username=' + this.username;
+        // newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
         window.location.search = newSearch;
       }
     </script>
@@ -27,14 +29,26 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <h3>Message</h3>
+        <form id="message_form" method="POST">
+          <input type="text" name="text">
+          <input type="submit" value="Send">
+        </form> 
       
 
       <button class="click_btn">Click Here</button> 
       <button class="chat_btn">Chats</button>
-      
+
  
 
     </div>
-    <div id="chats"></div>
+    <div id="chats">
+      <div>
+        <h4>username</h4>
+        <p>This is our nice message.</p>
+      </div>
+      
+      
+    </div>
   </body>
 </html>
